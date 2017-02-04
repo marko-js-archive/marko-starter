@@ -41,11 +41,15 @@ module.exports = (project) => {
 
   _initializeDefault(project, 'production', () => {
     const NODE_ENV = process.env.NODE_ENV;
-    return (NODE_ENV != null) && (NODE_ENV.toLowerCase() !== 'development');
+    return (NODE_ENV != null) && !NODE_ENV.toLowerCase().startsWith('dev');
   });
 
   _initializeDefault(project, 'colors', () => {
     return !project.getProduction();
+  });
+
+  _initializeDefault(project, 'minify', () => {
+    return project.getProduction();
   });
 
   project.constructor.forEachProperty((property) => {
