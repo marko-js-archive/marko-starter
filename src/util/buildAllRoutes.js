@@ -15,17 +15,17 @@ module.exports = (project) => {
       const outputDir = project.getOutputDir();
       const routePath = route.path;
 
-      let relativeFilePath = route.path;
-      let pageDir;
+      let relativeFilePath = path.join(routePath, 'index.html');
+      let pageDir = path.join(outputDir, routePath);
 
-      if (route.path.charAt(routePath.length - 1) === '/') {
-        // route path is for a "directory" so use index page
-        relativeFilePath = path.join(routePath, 'index.html');
-        pageDir = path.join(outputDir, routePath);
-      } else {
-        // route path is for a "file" (no need for index page)
-        pageDir = path.join(outputDir, path.dirname(routePath));
-      }
+      // if (routePath.charAt(routePath.length - 1) === '/') {
+      //   // route path is for a "directory" so use index page
+      //   relativeFilePath = path.join(routePath, 'index.html');
+      //   pageDir = path.join(outputDir, routePath);
+      // } else {
+      //   // route path is for a "file" (no need for index page)
+      //   pageDir = path.join(outputDir, path.dirname(routePath));
+      // }
 
       // normalize file system paths
       relativeFilePath = path.normalize(relativeFilePath);

@@ -15,7 +15,7 @@ module.exports = (options) => {
       metadata: route.metadata || {}
     };
 
-    logger.info(`Building page ${route.path}`);
+    logger.info(`Building page ${route.path}...`);
 
     if (options.handler) {
       options.handler(input, out);

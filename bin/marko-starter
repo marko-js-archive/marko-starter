@@ -1,0 +1,18 @@
+#!/usr/bin/env node
+
+const command = process.argv[2];
+
+switch (command) {
+case 'build':
+  require('./build');
+  break;
+
+case 'server':
+  require('./server');
+  break;
+
+default:
+  // shouldn't get here because argparse will have validated the command
+  console.error(`Unrecognized command: ${args.command}. Expected "build" or "server"`);
+  process.exit(1);
+}

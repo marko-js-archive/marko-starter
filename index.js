@@ -10,7 +10,14 @@ require('require-self-ref');
 require('marko/node-require').install();
 require('marko/compiler/config').meta = true;
 
+/*
+Browser Refresh
+*/
+require('marko/browser-refresh').enable();
+require('lasso/browser-refresh').enable('*.marko *.css *.less *.styl *.scss *.sass *.png *.jpeg *.jpg *.gif *.webp *.svg');
+
 const path = require('path');
+const rimraf = require('rimraf');
 const logging = require('~/src/logging');
 const pluginManager = require('~/src/plugin-manager');
 
@@ -32,6 +39,8 @@ exports.plugins = (plugins) => {
   userPlugins = plugins;
 };
 
+pluginManager.installPlugins(['marko-starter-lasso']);
+
 /**
  * This method is used to supply the project configuration.
  *
@@ -44,7 +53,7 @@ exports.projectConfig = (config) => {
       pluginManager.installPlugins(userPlugins);
 
       if (!pluginManager.isFeatureProvided('http-server')) {
-        pluginManager.installPlugins(['marko-starter-generic-http']);
+        pluginManager.installPlugins(['marko-starter-generic-server']);
       }
 
       let logger = logging.logger('init');
@@ -95,6 +104,8 @@ exports.projectConfig = (config) => {
         if (!project.getStaticUrlPrefix()) {
           project.setStaticUrlPrefix('/dist/');
         }
+
+        rimraf.sync(project.getOutputDir());
 
         return _runProjectTasks(project)
           .then(() => {

@@ -1,7 +1,10 @@
-function _initializeDefault (model, propertyName, defaultProvider) {
+function _initializeDefault (model, propertyName, defaultValue) {
   let value = model.get(propertyName);
   if (value === undefined) {
-    model.set(propertyName, defaultProvider());
+    if (typeof defaultValue === 'function') {
+      defaultValue = defaultValue();
+    }
+    model.set(propertyName, defaultValue);
   }
 }
 
@@ -32,8 +35,23 @@ module.exports = (project) => {
     return packageManifest.name || 'app';
   });
 
+  _initializeDefault(project, 'routePathPrefix', () => {
+    return '/' + project.getName();
+  });
+
   _initializeDefault(project, 'production', () => {
     const NODE_ENV = process.env.NODE_ENV;
     return (NODE_ENV != null) && (NODE_ENV.toLowerCase() !== 'development');
+  });
+
+  _initializeDefault(project, 'colors', () => {
+    return !project.getProduction();
+  });
+
+  project.constructor.forEachProperty((property) => {
+    let value = project.get(property.getKey());
+    if ((value === undefined) && property.defaultValue) {
+      _initializeDefault(project, property.getKey(), property.defaultValue);
+    }
   });
 };

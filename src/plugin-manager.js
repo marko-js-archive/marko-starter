@@ -13,13 +13,18 @@ exports.isFeatureProvided = (featureName) => {
 };
 
 exports.installPlugins = (plugins) => {
+  if (!plugins) {
+    return;
+  }
+
   const pluginContext = {
     models: {
       Model: require('fashion-model/Model'),
       Integer: require('fashion-model/Integer'),
-      Enum: require('fashion-model/Enum')
-    },
-    Project: Project
+      Enum: require('fashion-model/Enum'),
+      Raw: require('~/src/models/Raw'),
+      Project: Project
+    }
   };
 
   plugins.forEach((plugin, index) => {
@@ -39,12 +44,14 @@ exports.installPlugins = (plugins) => {
   });
 };
 
-exports.notifyProjectCreated = (project) => {
+exports.triggerProjectHook = (project, hookName) => {
   let promise = Promise.resolve();
 
   _plugins.forEach((plugin) => {
-    if (plugin.projectCreated) {
-      promise = Promise.resolve(plugin.projectCreated(project));
+    let hook = plugin[hookName];
+
+    if (hook) {
+      promise = Promise.resolve(hook(project));
     }
   });
 

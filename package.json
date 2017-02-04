@@ -9,16 +9,22 @@
   },
   "author": "Phillip Gates-Idem <phillip.idem@gmail.com>",
   "license": "MIT",
+  "bin": {
+    "marko-starter": "./bin/marko-starter"
+  },
   "dependencies": {
     "app-root-dir": "^1.0.2",
+    "browser-refresh": "^1.7.1",
+    "browser-refresh-taglib": "^1.1.0",
     "colors": "^1.1.2",
     "fashion-model": "^5.0.19",
-    "lasso": "^2.10.4",
-    "lasso-less": "^2.4.3",
     "marko-magic": "mlrawlings/marko-magic",
+    "marko-starter-generic-server": "philidem/marko-starter-generic-server",
+    "marko-starter-lasso": "philidem/marko-starter-lasso",
     "mkdirp": "^0.5.1",
     "raptor-util": "^3.1.0",
     "require-self-ref": "^2.0.1",
+    "rimraf": "^2.5.4",
     "routes-table": "^1.1.0"
   },
   "devDependencies": {

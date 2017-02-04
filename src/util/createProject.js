@@ -2,14 +2,15 @@ const path = require('path');
 const logging = require('~/src/logging');
 const Model = require('fashion-model');
 const ProjectSchema = require('~/src/models/Project');
-const pluginManager = require('~/src/plugin-manager');
 
 // Utility functions
 const _applyProjectDefaults = require('./applyProjectDefaults');
 const _loadFilesystemRoutes = require('./loadFilesystemRoutes');
+const _triggerProjectHook = require('./triggerProjectHook');
 
 let PROJECT_HOOKS = [
-  'beforeStart'
+  'beforeStart',
+  'projectCreated'
 ];
 
 function _findHooks (config, additionalConfig) {
@@ -40,10 +41,6 @@ module.exports = (config, configOverrides) => {
 
   config = Object.assign({}, config, configOverrides);
 
-  if (config.colors) {
-    require('colors');
-  }
-
   let errors = [];
   let Project = Model.extend(ProjectSchema);
   let project = new Project(config, errors);
@@ -62,18 +59,21 @@ module.exports = (config, configOverrides) => {
 
   _applyProjectDefaults(project);
 
+  if (project.getColors()) {
+    require('colors');
+  }
+
   project.setLogger(logging.logger(project.getName(), {
     colors: config.colors
   }));
 
   project.setTasks([
-    require('~/src/project-tasks/print-configuration'),
-    require('~/src/project-tasks/configure-default-lasso')
+    require('~/src/project-tasks/print-configuration')
   ]);
 
   project.setRoutes([]);
 
-  return pluginManager.notifyProjectCreated(project)
+  return _triggerProjectHook(project, 'projectCreated')
     .then(() => {
       return _loadFilesystemRoutes(project).then((routes) => {
         project.addRoutes(routes);

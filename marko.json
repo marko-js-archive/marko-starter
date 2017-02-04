@@ -1,6 +1,7 @@
 {
     "taglibImports": [
-        "lasso/marko.json",
-        "marko-magic/marko.json"
+        "marko-starter-lasso/marko.json",
+        "marko-magic/marko.json",
+        "browser-refresh-taglib/marko.json"
     ]
 }
