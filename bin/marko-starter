@@ -2,13 +2,25 @@
 
 const command = process.argv[2];
 
+const NODE_ENV = process.env.NODE_ENV;
+const production = (NODE_ENV != null) && (NODE_ENV.toLowerCase() !== 'development');
+
 switch (command) {
 case 'build':
   require('./build');
   break;
 
 case 'server':
-  require('./server');
+  if (production) {
+    require('./server');
+  } else {
+    require('browser-refresh').start({
+      script: require.resolve('./server'),
+      delay: 3000,
+      execArgs: [],
+      args: []
+    });
+  }
   break;
 
 default:
