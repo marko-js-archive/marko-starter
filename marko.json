@@ -1,0 +1,6 @@
+{
+    "taglibImports": [
+        "lasso/marko.json",
+        "marko-magic/marko.json"
+    ]
+}

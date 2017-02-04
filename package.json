@@ -1,0 +1,28 @@
+{
+  "name": "marko-starter",
+  "version": "0.0.1",
+  "description": "Simplify building and running a marko project",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/marko-js/marko-starter"
+  },
+  "author": "Phillip Gates-Idem <phillip.idem@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "app-root-dir": "^1.0.2",
+    "colors": "^1.1.2",
+    "fashion-model": "^5.0.19",
+    "lasso": "^2.10.4",
+    "lasso-less": "^2.4.3",
+    "marko-magic": "mlrawlings/marko-magic",
+    "mkdirp": "^0.5.1",
+    "raptor-util": "^3.1.0",
+    "require-self-ref": "^2.0.1",
+    "routes-table": "^1.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.13.0",
+    "eslint-config-marko": "latest"
+  }
+}
