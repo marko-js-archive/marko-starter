@@ -18,6 +18,7 @@
     "browser-refresh-taglib": "^1.1.0",
     "colors": "^1.1.2",
     "fashion-model": "^5.0.19",
+    "fashion-model-defaults": "^1.0.1",
     "marko": "^4.0.0-rc.12",
     "marko-magic": "git://github.com/mlrawlings/marko-magic.git",
     "marko-starter-generic-server": "git://github.com/philidem/marko-starter-generic-server.git",

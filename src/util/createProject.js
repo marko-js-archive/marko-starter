@@ -3,10 +3,10 @@ const logging = require('~/src/logging');
 const Model = require('fashion-model');
 const ProjectSchema = require('~/src/models/Project');
 
-// Utility functions
-const _applyProjectDefaults = require('./applyProjectDefaults');
 const _loadFilesystemRoutes = require('./loadFilesystemRoutes');
 const _triggerProjectHook = require('./triggerProjectHook');
+
+const DEFAULT_PROJECT_VERSION = '0.0.0';
 
 let PROJECT_HOOKS = [
   'beforeStart',
@@ -57,7 +57,11 @@ module.exports = (config, configOverrides) => {
     project.setPackageManifest({});
   }
 
-  _applyProjectDefaults(project);
+  const packageManifest = this.getPackageManifest();
+  const version = (packageManifest && packageManifest.version) || DEFAULT_PROJECT_VERSION;
+
+  project.setVersion(version);
+  project.applyDefaults();
 
   if (project.getColors()) {
     require('colors');

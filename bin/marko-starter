@@ -1,30 +1,17 @@
 #!/usr/bin/env node
 
-const command = process.argv[2];
+const commands = require('./commands');
+let commandArg = process.argv[2];
 
-const NODE_ENV = process.env.NODE_ENV;
-const production = (NODE_ENV != null) && (NODE_ENV.toLowerCase() !== 'development');
+if (!commandArg) {
+  commandArg = 'help';
+}
 
-switch (command) {
-case 'build':
-  require('./build');
-  break;
+const command = commands[commandArg];
 
-case 'server':
-  if (production) {
-    require('./server');
-  } else {
-    require('browser-refresh').start({
-      script: require.resolve('./server'),
-      delay: 3000,
-      execArgs: [],
-      args: []
-    });
-  }
-  break;
-
-default:
-  // shouldn't get here because argparse will have validated the command
-  console.error(`Unrecognized command: ${args.command}. Expected "build" or "server"`);
+if (!command) {
+  console.error(`Unrecognized command: ${command}. Expected "build" or "server"`);
   process.exit(1);
 }
+
+command.execute();

@@ -2,6 +2,7 @@ const Raw = require('~/src/models/Raw');
 const logging = require('~/src/logging');
 const routeHandlerUtil = require('~/src/route-handler-util');
 const path = require('path');
+const DefaultsMixin = require('fashion-model-defaults');
 
 /**
  * This is schema for a `Project` but plugins can modify this
@@ -10,40 +11,56 @@ const path = require('path');
  * @type {Object}
  */
 module.exports = {
+  mixins: [DefaultsMixin],
   properties: {
     name: {
       type: String,
-      description: 'Name of project'
+      description: 'Name of project',
+      default () {
+        return this.getPackageManifestName() || 'app';
+      }
     },
 
     routePathPrefix: {
       type: String,
-      description: 'A path segment that is added to every route (e.g. "/my-app")'
+      description: 'A path segment that is added to every route (e.g. "/my-app")',
+      default: '/'
     },
 
     version: {
       type: String,
-      description: 'Name of project'
+      description: 'Version of project'
     },
 
     dir: {
       type: String,
-      description: 'Project directory'
+      description: 'Project directory',
+      default: require('app-root-dir').get()
     },
 
     buildNumber: {
       type: Number,
-      description: 'Build number'
+      description: 'Build number',
+      default () {
+        let version = this.getVersion();
+        return version.split('.')[2] || '0';
+      }
     },
 
     colors: {
       type: Boolean,
-      description: 'Use color in logging?'
+      description: 'Use color in logging?',
+      default () {
+        return !this.getProduction();
+      }
     },
 
     minify: {
       type: Boolean,
-      description: 'Minify JavaScript and CSS?'
+      description: 'Minify JavaScript and CSS?',
+      default () {
+        return this.getProduction();
+      }
     },
 
     minifyCss: {
@@ -63,7 +80,8 @@ module.exports = {
 
     production: {
       type: Boolean,
-      description: 'Build for production?'
+      description: 'Build for production?',
+      default: require('~/src/util/isProduction')
     },
 
     flags: {
@@ -144,6 +162,11 @@ module.exports = {
     getRouteHandlerUtil () {
       // This is used by plugins to handle/render a route
       return routeHandlerUtil;
+    },
+
+    getPackageManifestName () {
+      const packageManifest = this.getPackageManifest();
+      return packageManifest && packageManifest.name;
     }
   }
 };
