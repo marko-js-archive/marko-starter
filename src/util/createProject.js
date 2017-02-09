@@ -57,7 +57,7 @@ module.exports = (config, configOverrides) => {
     project.setPackageManifest({});
   }
 
-  const packageManifest = this.getPackageManifest();
+  const packageManifest = project.getPackageManifest();
   const version = (packageManifest && packageManifest.version) || DEFAULT_PROJECT_VERSION;
 
   project.setVersion(version);
