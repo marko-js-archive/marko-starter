@@ -1464,6 +1464,14 @@ deresolve@^1.0.0:
     raptor-polyfill "^1.0.2"
     resolve-from "^1.0.1"
 
+deresolve@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/deresolve/-/deresolve-1.1.2.tgz#9cf2379c8d2d631dc4b9957294b90e4a72cb6ce0"
+  dependencies:
+    lasso-package-root "^1.0.0"
+    raptor-polyfill "^1.0.2"
+    resolve-from "^1.0.1"
+
 des.js@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/des.js/-/des.js-1.0.0.tgz#c074d2e2aa6a8a9a07dbd61f9a15c2cd83ec8ecc"
@@ -1933,6 +1941,10 @@ extglob@^0.3.1:
 extsprintf@1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/extsprintf/-/extsprintf-1.0.2.tgz#e1080e0658e300b06294990cc70e1502235fd550"
+
+fashion-model-defaults@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/fashion-model-defaults/-/fashion-model-defaults-1.0.1.tgz#51d3944bff26d72d44ab534645ecebeb30d8c9d0"
 
 fashion-model@^5.0.19:
   version "5.0.19"
@@ -2679,6 +2691,12 @@ lasso-package-root@^1.0.0:
   dependencies:
     lasso-caching-fs "^1.0.0"
 
+lasso-package-root@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/lasso-package-root/-/lasso-package-root-1.0.1.tgz#997d0e71f41d03c5f0fa09a5bc298d796f8b2c23"
+  dependencies:
+    lasso-caching-fs "^1.0.0"
+
 lasso-require@^3.3.0:
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/lasso-require/-/lasso-require-3.4.1.tgz#16495d3bd99be1fdbb6e1dab7e3f72e056586cb7"
@@ -2825,58 +2843,21 @@ loose-envify@^1.0.0:
     lasso-marko "^2.1.0"
     lasso-resolve-from "^1.2.0"
 
-"marko-starter-generic-server@git://github.com/philidem/marko-starter-generic-server.git":
+marko-starter-generic-server@^1.0.0:
   version "1.0.0"
-  resolved "git://github.com/philidem/marko-starter-generic-server.git#8fdabc098d587689f453c0dbac09586ccf6bea8d"
+  resolved "https://registry.yarnpkg.com/marko-starter-generic-server/-/marko-starter-generic-server-1.0.0.tgz#ce3db96c7bf06a692fad158cbf04bb0a36313d3f"
   dependencies:
     pad-right "^0.2.2"
     rest-handler "^1.2.16"
     send "^0.14.2"
 
-"marko-starter-lasso@git://github.com/philidem/marko-starter-lasso.git":
+marko-starter-lasso@^1.0.0:
   version "1.0.0"
-  resolved "git://github.com/philidem/marko-starter-lasso.git#976d8480a3c51e24b34514ad5e32e3cf8c293ceb"
+  resolved "https://registry.yarnpkg.com/marko-starter-lasso/-/marko-starter-lasso-1.0.0.tgz#922e5c656355ea3d3e196a324489f258cac5b462"
   dependencies:
     lasso "^2.10.4"
     lasso-less "^2.4.3"
     lasso-marko "^2.2.2"
-
-marko@4.0.0-rc.12:
-  version "4.0.0-rc.12"
-  resolved "https://registry.yarnpkg.com/marko/-/marko-4.0.0-rc.12.tgz#7afb4ccc0136f3cfcb69ccdfe7170274c686e39f"
-  dependencies:
-    app-module-path "^2.2.0"
-    argly "^1.0.0"
-    browser-refresh-client "^1.0.0"
-    char-props "~0.1.5"
-    complain "^1.0.0"
-    deresolve "^1.0.0"
-    escodegen "^1.8.1"
-    esprima "^3.1.1"
-    estraverse "^4.2.0"
-    events "^1.0.2"
-    events-light "^1.0.0"
-    he "^1.1.0"
-    htmljs-parser "^2.3.0"
-    lasso-modules-client "^2.0.3"
-    lasso-package-root "^1.0.0"
-    listener-tracker "^2.0.0"
-    minimatch "^3.0.2"
-    morphdom "^2.3.0"
-    object-assign "^4.1.0"
-    property-handlers "^1.0.0"
-    raptor-async "^1.1.2"
-    raptor-json "^1.0.1"
-    raptor-logging "^1.0.1"
-    raptor-polyfill "^1.0.0"
-    raptor-promises "^1.0.1"
-    raptor-regexp "^1.0.0"
-    raptor-util "^3.1.0"
-    resolve-from "^2.0.0"
-    simple-sha1 "^2.1.0"
-    strip-json-comments "^2.0.1"
-    try-require "^1.2.1"
-    warp10 "^1.0.0"
 
 marko@^3.12.1:
   version "3.14.1"
@@ -2907,6 +2888,44 @@ marko@^3.12.1:
     resolve-from "^1.0.0"
     strip-json-comments "^2.0.1"
     try-require "^1.2.1"
+
+marko@^4.0.0-rc.12:
+  version "4.0.0-rc.20"
+  resolved "https://registry.yarnpkg.com/marko/-/marko-4.0.0-rc.20.tgz#552b658762f34e892859a921ff3b366fe215db07"
+  dependencies:
+    app-module-path "^2.2.0"
+    argly "^1.0.0"
+    browser-refresh-client "^1.0.0"
+    char-props "~0.1.5"
+    complain "^1.0.0"
+    deresolve "^1.1.2"
+    escodegen "^1.8.1"
+    esprima "^3.1.1"
+    estraverse "^4.2.0"
+    events "^1.0.2"
+    events-light "^1.0.0"
+    he "^1.1.0"
+    htmljs-parser "^2.3.0"
+    lasso-caching-fs "^1.0.1"
+    lasso-modules-client "^2.0.3"
+    lasso-package-root "^1.0.1"
+    listener-tracker "^2.0.0"
+    minimatch "^3.0.2"
+    morphdom "^2.3.0"
+    object-assign "^4.1.0"
+    property-handlers "^1.0.0"
+    raptor-async "^1.1.2"
+    raptor-json "^1.0.1"
+    raptor-logging "^1.0.1"
+    raptor-polyfill "^1.0.0"
+    raptor-promises "^1.0.1"
+    raptor-regexp "^1.0.0"
+    raptor-util "^3.1.0"
+    resolve-from "^2.0.0"
+    simple-sha1 "^2.1.0"
+    strip-json-comments "^2.0.1"
+    try-require "^1.2.1"
+    warp10 "^1.0.0"
 
 media-typer@0.3.0:
   version "0.3.0"
@@ -4105,13 +4124,13 @@ standard@^8.6.0:
     eslint-plugin-standard "~2.0.1"
     standard-engine "~5.2.0"
 
-statuses@1, "statuses@>= 1.3.1 < 2", statuses@~1.3.1:
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/statuses/-/statuses-1.3.1.tgz#faf51b9eb74aaef3b3acf4ad5f61abf24cb7b93e"
-
-statuses@~1.2.1:
+statuses@1, statuses@~1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/statuses/-/statuses-1.2.1.tgz#dded45cc18256d51ed40aec142489d5c61026d28"
+
+"statuses@>= 1.3.1 < 2", statuses@~1.3.1:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/statuses/-/statuses-1.3.1.tgz#faf51b9eb74aaef3b3acf4ad5f61abf24cb7b93e"
 
 stream-browserify@^1.0.0:
   version "1.0.0"
