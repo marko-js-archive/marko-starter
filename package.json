@@ -26,6 +26,7 @@
     "mkdirp": "^0.5.1",
     "raptor-util": "^3.1.0",
     "require-self-ref": "^2.0.1",
+    "reverse-path": "0.0.1",
     "rimraf": "^2.5.4",
     "routes-table": "^1.1.0"
   },

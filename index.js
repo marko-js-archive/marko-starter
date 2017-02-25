@@ -102,7 +102,7 @@ exports.projectConfig = (config) => {
         }
 
         if (!project.getStaticUrlPrefix()) {
-          project.setStaticUrlPrefix('/dist/');
+          project.setStaticUrlPrefix('/');
         }
 
         rimraf.sync(project.getOutputDir());
