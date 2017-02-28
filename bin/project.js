@@ -1,15 +1,10 @@
 const path = require('path');
 const projectDir = require('app-root-dir').get();
+const tryRequire = require('try-require');
 
-let project;
+let project = tryRequire(path.join(projectDir, 'project'), require);
 
-try {
-  project = require(path.join(projectDir, 'project'));
-} catch (err) {
-  if (err.code !== 'MODULE_NOT_FOUND') {
-    throw err;
-  }
-
+if (!project) {
   project = require('../index').projectConfig({
     dir: require('app-root-dir').get()
   });

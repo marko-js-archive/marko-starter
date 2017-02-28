@@ -28,7 +28,8 @@
     "require-self-ref": "^2.0.1",
     "reverse-path": "0.0.1",
     "rimraf": "^2.5.4",
-    "routes-table": "^1.1.0"
+    "routes-table": "^1.1.0",
+    "try-require": "^1.2.1"
   },
   "devDependencies": {
     "eslint": "^3.13.0",
