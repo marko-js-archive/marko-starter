@@ -3,14 +3,14 @@ module.exports = (options) => {
   const route = options.route;
   const out = options.out;
   const logger = project.getLogger();
-  const path = options.path;
+  const path = options.path || route.path;
 
   return new Promise((resolve, reject) => {
     out.on('error', reject);
     out.on('finish', resolve);
 
     const input = {
-      path: path || route.path,
+      path,
       params: options.params || {},
       query: options.query || {},
       metadata: route.metadata || {}
