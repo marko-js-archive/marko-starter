@@ -149,6 +149,9 @@ module.exports = {
           route.path = path.join(routePathPrefix, route.path);
         }
 
+        // When using `path` functions on Windows, forward slashes get replaced
+        // with double back slashes.
+        route.path = route.path.replace('\\', '/');
         existingRoutes.push(route);
       }
     },
