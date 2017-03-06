@@ -1,6 +1,6 @@
 {
   "name": "marko-starter",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Simplify building and running a marko project",
   "main": "index.js",
   "repository": {
