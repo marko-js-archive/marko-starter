@@ -1,3 +1,5 @@
+require('./env-check');
+
 const path = require('path');
 const projectDir = require('app-root-dir').get();
 
