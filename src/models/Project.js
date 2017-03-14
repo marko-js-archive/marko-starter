@@ -1,3 +1,5 @@
+'use strict';
+
 const Raw = require('~/src/models/Raw');
 const logging = require('~/src/logging');
 const routeHandlerUtil = require('~/src/route-handler-util');

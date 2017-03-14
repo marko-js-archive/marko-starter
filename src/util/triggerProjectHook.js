@@ -1,3 +1,5 @@
+'use strict';
+
 const pluginManager = require('~/src/plugin-manager');
 module.exports = (project, hookName) => {
   // Notify plugins first

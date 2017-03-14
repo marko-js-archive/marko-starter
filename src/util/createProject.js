@@ -1,3 +1,5 @@
+'use strict';
+
 const path = require('path');
 const logging = require('~/src/logging');
 const Model = require('fashion-model');

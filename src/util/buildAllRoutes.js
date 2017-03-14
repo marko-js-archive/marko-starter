@@ -1,3 +1,5 @@
+'use strict';
+
 const fs = require('fs');
 const path = require('path');
 const mkdirp = require('mkdirp');
@@ -22,42 +24,42 @@ module.exports = (project) => {
   return promise.then(() => buildResult);
 };
 
-function buildRoute(project, route, buildResult, params) {
-    const logger = project.getLogger();
-    const outputDir = project.getOutputDir();
-    const routePath = reversePath(route.path, params);
+function buildRoute (project, route, buildResult, params) {
+  const logger = project.getLogger();
+  const outputDir = project.getOutputDir();
+  const routePath = reversePath(route.path, params);
 
-    let relativeFilePath = path.join(routePath, 'index.html');
-    let pageDir = path.join(outputDir, routePath);
+  let relativeFilePath = path.join(routePath, 'index.html');
+  let pageDir = path.join(outputDir, routePath);
 
-    // normalize file system paths
-    relativeFilePath = path.normalize(relativeFilePath);
-    pageDir = path.normalize(pageDir);
+  // normalize file system paths
+  relativeFilePath = path.normalize(relativeFilePath);
+  pageDir = path.normalize(pageDir);
 
-    const outputFile = path.join(outputDir, relativeFilePath);
+  const outputFile = path.join(outputDir, relativeFilePath);
 
-    logger.info('Building ' + routePath + ' to ' + outputFile + '...');
+  logger.info('Building ' + routePath + ' to ' + outputFile + '...');
 
-    buildResult.addToRoutes({
-      url: routePath,
-      path: routePath,
-      file: relativeFilePath
-    });
+  buildResult.addToRoutes({
+    url: routePath,
+    path: routePath,
+    file: relativeFilePath
+  });
 
-    mkdirp.sync(pageDir);
+  mkdirp.sync(pageDir);
 
-    const out = fs.createWriteStream(outputFile);
+  const out = fs.createWriteStream(outputFile);
 
-    return _buildRoute({
-      project,
-      route,
-      out,
-      params,
+  return _buildRoute({
+    project,
+    route,
+    out,
+    params,
 
-      // path with params filled in
-      path:routePath,
+    // path with params filled in
+    path: routePath,
 
-      // original route handler (if provided)
-      handler: route.handler
-    });
+    // original route handler (if provided)
+    handler: route.handler
+  });
 }

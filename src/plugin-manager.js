@@ -1,3 +1,5 @@
+'use strict';
+
 const logging = require('~/src/logging');
 const Project = require('~/src/models/Project');
 

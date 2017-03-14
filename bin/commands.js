@@ -1,3 +1,5 @@
+'use strict';
+
 const colors = require('colors/safe');
 const isProduction = require('../src/util/isProduction');
 

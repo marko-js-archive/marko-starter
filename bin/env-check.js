@@ -1,3 +1,5 @@
+'use strict';
+
 const colors = require('colors/safe');
 
 const projectDir = require('app-root-dir').get();

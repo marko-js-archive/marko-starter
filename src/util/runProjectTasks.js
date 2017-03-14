@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = (project) => {
   let promise = Promise.resolve();
 

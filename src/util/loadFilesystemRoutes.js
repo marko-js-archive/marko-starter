@@ -1,3 +1,5 @@
+'use strict';
+
 const path = require('path');
 const routesTable = require('routes-table');
 

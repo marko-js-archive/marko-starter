@@ -1,3 +1,5 @@
+'use strict';
+
 /*
 Allow requiring paths relative to the root of the project:
 require('~/src');

@@ -1,3 +1,5 @@
+'use strict';
+
 class Logger {
   constructor (name, options) {
     let prefix = `[marko-starter ${name}] `;
