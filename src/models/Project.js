@@ -41,7 +41,7 @@ module.exports = {
     },
 
     buildNumber: {
-      type: Number,
+      type: String,
       description: 'Build number',
       default () {
         let version = this.getVersion();
