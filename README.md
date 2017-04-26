@@ -1,5 +1,15 @@
 # marko-starter
 
+`marko-starter` is a project for building and running
+[Marko.js](https://github.com/marko-js/marko) applications. It provides a
+toolset that includes a build pipeline and a generic HTTP server with routing
+that makes building Marko applications easy! If you're looking to build a
+project from scratch quickly, check out
+[marko-devtools](https://github.com/marko-js/marko-devtools), which includes a
+command for creating Marko projects with `marko-starter`!
+
+## Getting Started
+
 To get started, `marko-starter` may be installed locally to your project or
 globally:
 
@@ -21,16 +31,16 @@ the `routes/` directory.  Inside this directory, you can put either an
 
 <details>
 <summary>Example scenario</summary>
->
-> Given a directory structure like this:
->
-> ```
-> ⤷ routes/
->   ⤷ my-page/
->     ⤷ index.marko
-> ```
->
-> Hitting `/my-page` will render `index.marko`.
+
+Given a directory structure like this:
+
+```
+⤷ routes/
+  ⤷ my-page/
+    ⤷ index.marko
+```
+
+Hitting `/my-page` will render `index.marko`.
 </details>
 
 ### Custom routes and params
@@ -49,32 +59,31 @@ template will be any values in the url query string and url parameters.
 
 <details>
 <summary>Example scenario</summary>
->
-> Given a route:
-> ```
-> /people/:name
-> ```
->
-> And a template:
-> ```marko
-> <ul>
->     <li>${data.name}</li>
->     <li>${data.age}</li>
+
+Given a route:
+
+`/people/:name`
+
+And a template:
+
+```marko
+<ul>
+    <li>${data.name}</li>
+    <li>${data.age}</li>
 </ul>
-> ```
->
-> When you hit the following url:
-> ```
-> /people/frank?age=27
-> ```
->
-> The rendered output would be:
-> ```html
-> <ul>
->     <li>frank</li>
->     <li>27</li>
-> </ul>
-> ```
+```
+
+When you hit the following url:
+
+`/people/frank?age=27`
+
+The rendered output would be:
+```html
+<ul>
+    <li>frank</li>
+    <li>27</li>
+</ul>
+```
 </details>
 
 ### Custom handler entry
@@ -119,6 +128,9 @@ methods.
 
 <details>
 <summary>Example single file component</summary>
+Single file components contain the component logic and the markup in the same
+index.marko file:
+
 **index.marko**
 ```marko
 class {
@@ -143,13 +155,17 @@ class {
 </details>
 
 <details>
-<summary>Example split component</summary>
+<summary>Example split-file component</summary>
+Split-file components separate the component logic into a component.js and
+the markup in index.marko:
+
 **index.marko**
 ```html
 <div>${state.count}</div>
 <button on-click('incrementCount')>+</button>
 <button on-click('resetCount')>reset</button>
 ```
+
 **component.js**
 ```js
 module.exports = {
@@ -181,19 +197,22 @@ components will only be available to the parent component.
 
 <details>
 <summary>Example subcomponent</summary>
->
-> Given a directory structure like this:
->
-> ```
-> ⤷ components/
->    ⤷ my-component/
->       ⤷ components/
->          ⤷ my-subcomponent/
->             ⤷ index.marko
->       ⤷ index.marko
-> ```
->
-> You will only be able to use `<my-subcomponent>` from the `my-component/index.marko` template or other subcomponents defined under `my-component/components`.
+
+Given a directory structure like this:
+
+```
+⤷ components/
+  ⤷ my-component/
+    ⤷ components/
+      ⤷ my-subcomponent/
+        ⤷ index.marko
+    ⤷ index.marko
+```
+
+
+You will only be able to use `my-subcomponent` from the
+`my-component/index.marko` template or other subcomponents defined under
+`my-component/components`.
 </details>
 
 ## Building a static site
@@ -280,3 +299,4 @@ a `baseurl` entry which will be prepended to any root-relative urls.
 
 For an example of a project that is using `marko-starter` check out
 [markojs-website](https://github.com/marko-js/markojs-website)
+
