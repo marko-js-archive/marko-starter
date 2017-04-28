@@ -11,6 +11,7 @@ require('require-self-ref');
 // required just like any other JavaScript modules.
 require('marko/node-require').install();
 require('marko/compiler/config').meta = true;
+require('lasso/node-require-no-op').enable('.css', '.less', '.styl', '.scss', '.sass');
 
 /*
 Browser Refresh
