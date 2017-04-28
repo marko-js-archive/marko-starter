@@ -1,11 +1,16 @@
 'use strict';
 
+const fs = require('fs');
 const path = require('path');
 const routesTable = require('routes-table');
 
 module.exports = (project) => {
-  const routesDir = path.join(project.getDir(), 'routes');
+  const rootDir = project.getDir();
+  const srcDir = path.join(rootDir, 'src');
+  const routesDir = fs.existsSync(srcDir) ? srcDir : rootDir;
+
   return routesTable.build(routesDir, {
+    index: true,
     onRoute (route) {
       if (route.handler) {
         return route;
