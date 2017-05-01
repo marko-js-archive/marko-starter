@@ -78,8 +78,14 @@ exports.projectConfig = (config) => {
             return _triggerProjectHook(project, 'beforeStart');
           })
           .then(() => {
+            return _triggerProjectHook(project, 'beforeStartServer');
+          })
+          .then(() => {
             // `startServer` is provided by plugin
             return project.startServer();
+          })
+          .then(() => {
+            return _triggerProjectHook(project, 'afterServerStarted');
           });
       }).catch((err) => {
         logger.error(`Error starting server. ${err.stack || err}`);
@@ -114,7 +120,13 @@ exports.projectConfig = (config) => {
             return _triggerProjectHook(project, 'beforeStart');
           })
           .then(() => {
+            return _triggerProjectHook(project, 'beforeStartBuild');
+          })
+          .then(() => {
             return _buildAllRoutes(project);
+          })
+          .then(() => {
+            return _triggerProjectHook(project, 'afterBuild');
           });
       }).then((buildResult) => {
         logger.success('Build complete');

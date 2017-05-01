@@ -12,7 +12,11 @@ const DEFAULT_PROJECT_VERSION = '0.0.0';
 
 let PROJECT_HOOKS = [
   'beforeStart',
-  'projectCreated'
+  'beforeStartBuild',
+  'beforeStartServer',
+  'projectCreated',
+  'afterBuild',
+  'afterServerStarted'
 ];
 
 function _findHooks (config, additionalConfig) {
