@@ -50,91 +50,97 @@ pluginManager.installPlugins(['marko-starter-lasso']);
  * @return {Object} an object with a `server(config)` and `build(config)` method
  */
 exports.projectConfig = (config) => {
+  config = config || {};
+
   return {
     server (serverConfig) {
-      pluginManager.installPlugins(userPlugins);
+      const beforeStartPromise = config.beforeStartServer || Promise.resolve;
 
-      if (!pluginManager.isFeatureProvided('http-server')) {
-        pluginManager.installPlugins(['marko-starter-generic-server']);
-      }
+      return beforeStartPromise()
+        .then(() => {
+          pluginManager.installPlugins(userPlugins);
 
-      let logger = logging.logger('init');
+          if (!pluginManager.isFeatureProvided('http-server')) {
+            pluginManager.installPlugins(['marko-starter-generic-server']);
+          }
 
-      return _createProject(config, serverConfig).then((project) => {
-        logger = project.getLogger();
+          let logger = logging.logger('init');
 
-        logger.info('Starting server...');
+          return _createProject(config, serverConfig).then((project) => {
+            logger = project.getLogger();
 
-        if (!project.getOutputDir()) {
-          project.setOutputDir(path.join(project.getDir(), '.cache/static'));
-        }
+            logger.info('Starting server...');
 
-        if (!project.getStaticUrlPrefix()) {
-          project.setStaticUrlPrefix('/static/');
-        }
+            if (!project.getOutputDir()) {
+              project.setOutputDir(path.join(project.getDir(), '.cache/static'));
+            }
 
-        return _runProjectTasks(project)
-          .then(() => {
-            return _triggerProjectHook(project, 'beforeStart');
-          })
-          .then(() => {
-            return _triggerProjectHook(project, 'beforeStartServer');
-          })
-          .then(() => {
-            // `startServer` is provided by plugin
-            return project.startServer();
-          })
-          .then(() => {
-            return _triggerProjectHook(project, 'afterServerStarted');
+            if (!project.getStaticUrlPrefix()) {
+              project.setStaticUrlPrefix('/static/');
+            }
+
+            return _runProjectTasks(project)
+              .then(() => {
+                return _triggerProjectHook(project, 'beforeStart');
+              })
+              .then(() => {
+                // `startServer` is provided by plugin
+                return project.startServer();
+              })
+              .then(() => {
+                return _triggerProjectHook(project, 'afterServerStarted');
+              });
+          }).catch((err) => {
+            logger.error(`Error starting server. ${err.stack || err}`);
+            process.exit(1);
           });
-      }).catch((err) => {
-        logger.error(`Error starting server. ${err.stack || err}`);
-        process.exit(1);
-      });
+        });
     },
 
     build (buildConfig) {
-      const _buildAllRoutes = require('~/src/util/buildAllRoutes');
+      const beforeBuildPromise = config.beforeBuild || Promise.resolve;
 
-      pluginManager.installPlugins(userPlugins);
+      return beforeBuildPromise()
+        .then(() => {
+          const _buildAllRoutes = require('~/src/util/buildAllRoutes');
 
-      let logger = logging.logger('init');
+          pluginManager.installPlugins(userPlugins);
 
-      return _createProject(config, buildConfig).then((project) => {
-        logger = project.getLogger();
+          let logger = logging.logger('init');
 
-        logger.info('Building...');
+          return _createProject(config, buildConfig).then((project) => {
+            logger = project.getLogger();
 
-        if (!project.getOutputDir()) {
-          project.setOutputDir(path.join(project.getDir(), 'dist'));
-        }
+            logger.info('Building...');
 
-        if (!project.getStaticUrlPrefix()) {
-          project.setStaticUrlPrefix('/');
-        }
+            if (!project.getOutputDir()) {
+              project.setOutputDir(path.join(project.getDir(), 'dist'));
+            }
 
-        rimraf.sync(project.getOutputDir());
+            if (!project.getStaticUrlPrefix()) {
+              project.setStaticUrlPrefix('/');
+            }
 
-        return _runProjectTasks(project)
-          .then(() => {
-            return _triggerProjectHook(project, 'beforeStart');
-          })
-          .then(() => {
-            return _triggerProjectHook(project, 'beforeBuild');
-          })
-          .then(() => {
-            return _buildAllRoutes(project);
-          })
-          .then(() => {
-            return _triggerProjectHook(project, 'afterBuild');
+            rimraf.sync(project.getOutputDir());
+
+            return _runProjectTasks(project)
+              .then(() => {
+                return _triggerProjectHook(project, 'beforeStart');
+              })
+              .then(() => {
+                return _buildAllRoutes(project);
+              })
+              .then(() => {
+                return _triggerProjectHook(project, 'afterBuild');
+              });
+          }).then((buildResult) => {
+            logger.success('Build complete');
+            return buildResult;
+          }).catch((err) => {
+            logger.error(`Error building project. ${err.stack || err}`);
+            process.exit(1);
           });
-      }).then((buildResult) => {
-        logger.success('Build complete');
-        return buildResult;
-      }).catch((err) => {
-        logger.error(`Error building project. ${err.stack || err}`);
-        process.exit(1);
-      });
+        });
     }
   };
 };
