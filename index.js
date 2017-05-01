@@ -55,9 +55,15 @@ exports.projectConfig = (config) => {
 
   return {
     server (serverConfig) {
-      const beforeStartPromise = config.beforeStartServer || Promise.resolve;
+      let beforeStartPromise = Promise.resolve();
 
-      return beforeStartPromise()
+      if (config.beforeStartServer) {
+        beforeStartPromise = beforeStartPromise.then(() => {
+          return config.beforeStartServer();
+        });
+      }
+
+      return beforeStartPromise
         .then(() => {
           pluginManager.installPlugins(userPlugins);
 
@@ -99,9 +105,15 @@ exports.projectConfig = (config) => {
     },
 
     build (buildConfig) {
-      const beforeBuildPromise = config.beforeBuild || Promise.resolve;
+      let beforeBuildPromise = Promise.resolve();
 
-      return beforeBuildPromise()
+      if (config.beforeBuild) {
+        beforeBuildPromise = beforeBuildPromise.then(() => {
+          return config.beforeBuild();
+        });
+      }
+
+      return beforeBuildPromise
         .then(() => {
           const _buildAllRoutes = require('~/src/util/buildAllRoutes');
 
