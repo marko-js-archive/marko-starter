@@ -120,7 +120,7 @@ exports.projectConfig = (config) => {
             return _triggerProjectHook(project, 'beforeStart');
           })
           .then(() => {
-            return _triggerProjectHook(project, 'beforeStartBuild');
+            return _triggerProjectHook(project, 'beforeBuild');
           })
           .then(() => {
             return _buildAllRoutes(project);

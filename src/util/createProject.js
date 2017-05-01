@@ -12,7 +12,7 @@ const DEFAULT_PROJECT_VERSION = '0.0.0';
 
 let PROJECT_HOOKS = [
   'beforeStart',
-  'beforeStartBuild',
+  'beforeBuild',
   'beforeStartServer',
   'projectCreated',
   'afterBuild',

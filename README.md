@@ -270,6 +270,27 @@ module.exports = require('marko-starter').projectConfig({
 });
 ```
 
+`marko-starter` also provides useful hooks for executing code before and after
+running a build or starting the server:
+
+- `beforeBuild`: Runs before the build runs
+- `beforeStartServer`: Runs before the server is started
+- `afterBuild`: Runs after the build is complete
+- `afterServerStarted`: Runs after the server has successfully started
+
+Hooks can be registered by providing the hook as a property
+calling `projectConfig`, and may return a `Promise`:
+
+```js
+module.exports = require('marko-starter').projectConfig({
+  ...
+  beforeBuild() {
+    console.log('Executing before the build starts!');
+    return Promise.resolve();
+  }
+  ...
+});
+```
 
 ## Publishing to GitHub Pages (or other remote repo)
 
