@@ -29,7 +29,7 @@
     "resolve-from": "^2.0.0",
     "reverse-path": "0.0.1",
     "rimraf": "^2.5.4",
-    "routes-table": "git://github.com/austinkelleher/routes-table.git#1-ignore-dotfiles",
+    "routes-table": "^1.2.1",
     "try-require": "^1.2.1"
   },
   "devDependencies": {
