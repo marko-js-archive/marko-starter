@@ -86,6 +86,26 @@ The rendered output would be:
 ```
 </details>
 
+Routes may also be added to the `projectConfig`:
+
+**my-project/project.js**
+```js
+const template = require('./template.marko');
+
+module.exports = require('marko-starter').projectConfig({
+  ...
+  routes: [
+    {
+      path: '/foo/:name',
+      handler(input, out) {
+        const name = input.params.name;
+        template.render({ name }, out);
+      }
+    }
+  ]
+});
+```
+
 ### Custom handler entry
 
 If you need more control over the data passed to the template or don't even want
