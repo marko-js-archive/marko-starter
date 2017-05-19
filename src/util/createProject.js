@@ -81,8 +81,6 @@ module.exports = (config, configOverrides) => {
     require('~/src/project-tasks/print-configuration')
   ]);
 
-  project.setRoutes([]);
-
   return _triggerProjectHook(project, 'projectCreated')
     .then(() => {
       return _loadFilesystemRoutes(project).then((routes) => {

@@ -133,7 +133,8 @@ module.exports = {
     routes: {
       type: [Raw],
       description: 'Routes that have been added to this project',
-      configurable: false
+      configurable: false,
+      default: []
     }
   },
 
