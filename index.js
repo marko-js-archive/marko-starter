@@ -10,7 +10,7 @@ require('require-self-ref');
 // for `.marko` files. Once installed, `*.marko` files can be
 // required just like any other JavaScript modules.
 require('marko/node-require').install();
-require('marko/compiler/config').meta = true;
+require('marko/compiler').config.meta = true;
 require('lasso/node-require-no-op').enable('.css', '.less', '.styl', '.scss', '.sass');
 
 /*
