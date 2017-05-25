@@ -312,6 +312,21 @@ module.exports = require('marko-starter').projectConfig({
 });
 ```
 
+## Project Plugins
+
+External project plugins can be installed into `marko-starter`. The
+`projectConfig` can take a `plugins` option with an array of plugins. A
+plugins can be a string representing an installed node module or a plugin
+object:
+
+**my-project/project.js**
+```js
+module.exports = require('marko-starter').projectConfig({
+  plugins: ['marko-starter-babel']
+});
+
+```
+
 ## Publishing to GitHub Pages (or other remote repo)
 
 Simply add a `static-repo` entry to your `package.json` which is a git url.

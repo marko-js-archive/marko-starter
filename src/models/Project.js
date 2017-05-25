@@ -135,6 +135,11 @@ module.exports = {
       description: 'Routes that have been added to this project',
       configurable: false,
       default: []
+    },
+
+    plugins: {
+      type: [Raw],
+      description: 'Plugins that should be added to the project'
     }
   },
 

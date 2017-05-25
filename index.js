@@ -29,7 +29,7 @@ const _createProject = require('~/src/util/createProject');
 const _runProjectTasks = require('~/src/util/runProjectTasks');
 const _triggerProjectHook = require('~/src/util/triggerProjectHook');
 
-let userPlugins;
+let userPlugins = [];
 
 /**
  * This function is used to install custom plugins that will be used
@@ -52,6 +52,10 @@ pluginManager.installPlugins(['marko-starter-lasso']);
  */
 exports.projectConfig = (config) => {
   config = config || {};
+
+  if (config.plugins) {
+    userPlugins = userPlugins.concat(config.plugins);
+  }
 
   return {
     server (serverConfig) {

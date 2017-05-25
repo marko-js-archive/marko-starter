@@ -15,7 +15,7 @@ exports.isFeatureProvided = (featureName) => {
 };
 
 exports.installPlugins = (plugins) => {
-  if (!plugins) {
+  if (!plugins || !plugins.length) {
     return;
   }
 
