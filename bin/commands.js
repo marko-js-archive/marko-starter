@@ -49,7 +49,7 @@ const commands = module.exports = {
   'serve-static': {
     help: 'Serve the directory with the statically built application',
     execute () {
-      require('./serve');
+      require('./serve-static');
     }
   }
 };

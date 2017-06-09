@@ -9,7 +9,7 @@ const projectDir = require('app-root-dir').get();
 const runBuild = require('./build').run;
 
 const tryRequire = require('try-require');
-const httpServerPath = path.resolve(__dirname, '../node_modules/http-server/bin/http-server');
+const httpServerPath = path.join(require.resolve('http-server'), '../../bin/http-server');
 const args = process.argv;
 
 const DEFAULT_DIST_DIR = path.join(projectDir, 'dist');
