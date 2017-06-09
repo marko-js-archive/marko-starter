@@ -11,7 +11,7 @@ const commands = module.exports = {
   'build': {
     help: 'Builds the project',
     execute () {
-      require('./build');
+      require('./build').run();
     }
   },
 
@@ -43,6 +43,13 @@ const commands = module.exports = {
       }
 
       process.exit(0);
+    }
+  },
+
+  'serve-static': {
+    help: 'Serve the directory with the statically built application',
+    execute () {
+      require('./serve');
     }
   }
 };

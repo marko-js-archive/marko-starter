@@ -312,6 +312,26 @@ module.exports = require('marko-starter').projectConfig({
 });
 ```
 
+## Serving a static site over HTTP
+
+You can easily serve the directory that contains the statically built version
+of your application with `marko-starter`.
+
+```bash
+marko-starter serve-static
+```
+
+Now you can navigate to [localhost:8080](http://localhost:8080) to view the
+application!
+
+`marko-starter` uses [http-server](https://github.com/indexzero/http-server)
+to serve static files. You can pass command line arguments that
+[http-server](https://github.com/indexzero/http-server) supports:
+
+```bash
+marko-starter serve-static -p 9001 # Serve on port 9001
+```
+
 ## Project Plugins
 
 External project plugins can be installed into `marko-starter`. The
@@ -355,4 +375,3 @@ a `baseurl` entry which will be prepended to any root-relative urls.
 
 For an example of a project that is using `marko-starter` check out
 [markojs-website](https://github.com/marko-js/markojs-website)
-

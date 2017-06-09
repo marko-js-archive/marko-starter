@@ -58,6 +58,9 @@ exports.projectConfig = (config) => {
   }
 
   return {
+    getUserConfig () {
+      return config;
+    },
     server (serverConfig) {
       let beforeStartPromise = Promise.resolve();
 
