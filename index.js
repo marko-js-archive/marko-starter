@@ -128,6 +128,10 @@ exports.projectConfig = (config) => {
 
           let logger = logging.logger('init');
 
+          if (!pluginManager.isFeatureProvided('http-server')) {
+            pluginManager.installPlugins(['marko-starter-generic-server']);
+          }
+
           return _createProject(config, buildConfig).then((project) => {
             logger = project.getLogger();
 
