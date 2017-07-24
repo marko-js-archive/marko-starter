@@ -2,17 +2,39 @@
 'use strict';
 
 const commands = require('./commands');
-let commandArg = process.argv[2];
+const argv = process.argv.slice(2);
+let args;
+let execArgs;
+let commandName;
+let commandIndex;
 
-if (!commandArg) {
-  commandArg = 'help';
+if(argv.length) {
+  for(var i = 0; i < argv.length; i++) {
+    if(argv[i][0] !== '-') {
+      commandIndex = i;
+      break;
+    }
+    if(argv[i] === '-r' || argv[i] === '--require') {
+      i++; // these flags take an additional argument. skip it.
+    }
+  }
 }
 
-const command = commands[commandArg];
+if (commandIndex != null) {
+  commandName = argv[commandIndex];
+  execArgs = argv.slice(0, commandIndex);
+  args = argv.slice(commandIndex+1);
+} else {
+  commandName = 'help';
+  execArgs = [];
+  args = [];
+}
+
+const command = commands[commandName];
 
 if (!command) {
   console.error(`Unrecognized command: ${command}. Expected "build" or "server"`);
   process.exit(1);
 }
 
-command.execute();
+command.execute({ execArgs, args });

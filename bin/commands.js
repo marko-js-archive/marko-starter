@@ -2,6 +2,7 @@
 
 const colors = require('colors/safe');
 const isProduction = require('../src/util/isProduction');
+const fork = require('child_process').fork;
 
 function _helpInColor (command, help) {
   console.log(colors.green(command) + ': ' + colors.yellow(help));
@@ -17,15 +18,20 @@ const commands = module.exports = {
 
   'server': {
     help: 'Starts a server in the present working directory',
-    execute () {
-      if (isProduction) {
-        require('./server');
+    execute ({ execArgs, args }) {
+      const serverPath = require.resolve('./server');
+      if (isProduction || args.indexOf('--no-watch') !== -1) {
+        if (execArgs.length) {
+          fork(serverPath, args, { execArgv: execArgs });
+        } else {
+          require(serverPath);
+        }
       } else {
         require('browser-refresh').start({
-          script: require.resolve('./server'),
+          script: serverPath,
           delay: 3000,
-          execArgs: [],
-          args: []
+          execArgs,
+          args
         });
       }
     }
