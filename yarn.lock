@@ -2835,9 +2835,9 @@ loose-envify@^1.0.0:
   dependencies:
     js-tokens "^3.0.0"
 
-"marko-magic@git://github.com/mlrawlings/marko-magic.git":
+"marko-magic@https://github.com/mlrawlings/marko-magic.git":
   version "1.0.0"
-  resolved "git://github.com/mlrawlings/marko-magic.git#be9e601bef77d26235e4a19c5b3c579924cd5df6"
+  resolved "https://github.com/mlrawlings/marko-magic.git#be9e601bef77d26235e4a19c5b3c579924cd5df6"
   dependencies:
     lasso "^2.8.3"
     lasso-marko "^2.1.0"
