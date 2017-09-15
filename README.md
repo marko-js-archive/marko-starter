@@ -54,8 +54,15 @@ custom express-style url parameters.  You do this by exporting a `path` from a
 exports.path = '/people/:name';
 ```
 
-If using an `index.marko` template for the route, the data passed to the
-template will be any values in the url query string and url parameters.
+If using an `index.marko` template for the route, the `input` will contain the
+following properties:
+
+| Property   | Type     | Description                                                                          | Example            |
+|------------|----------|--------------------------------------------------------------------------------------|--------------------|
+| `path`     | `String` | The path from the request                                                            | `"/people/frank"`  |
+| `params`   | `Object` | An object that contains `String` properties populated from the path placeholders     | `{name: "frank"}`  |
+| `query`    | `Object` | An object that contains `String` query parameters properties from the _query string_ | `{age: "27"}`        |
+| `metadata` | `Object` | The route metadata                                                                   | `{secure: false}`  |
 
 <details>
 <summary>Example scenario</summary>
@@ -68,8 +75,8 @@ And a template:
 
 ```marko
 <ul>
-    <li>${data.name}</li>
-    <li>${data.age}</li>
+    <li>${input.params.name}</li>
+    <li>${input.query.age}</li>
 </ul>
 ```
 
