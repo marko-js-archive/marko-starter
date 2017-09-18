@@ -22,7 +22,7 @@
     "http-server": "^0.10.0",
     "lasso": "^2.11.12",
     "marko": "^4.1.1",
-    "marko-magic": "git://github.com/mlrawlings/marko-magic.git",
+    "marko-magic": "https://github.com/mlrawlings/marko-magic.git",
     "marko-starter-generic-server": "^1.0.0",
     "marko-starter-lasso": "^1.0.0",
     "mkdirp": "^0.5.1",
