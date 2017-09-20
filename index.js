@@ -148,10 +148,13 @@ exports.projectConfig = (config) => {
                 return _triggerProjectHook(project, 'beforeStart');
               })
               .then(() => {
+                // Return a promise that resolves to a `BuildResult`
                 return _buildAllRoutes(project);
               })
-              .then(() => {
-                return _triggerProjectHook(project, 'afterBuild');
+              .then((buildResult) => {
+                // Provide the `project` and `buildResult` to `afterBuild`
+                const args = [project, buildResult];
+                return _triggerProjectHook(project, 'afterBuild', args);
               });
           }).then((buildResult) => {
             logger.success('Build complete');
