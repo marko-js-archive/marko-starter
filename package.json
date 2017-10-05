@@ -20,7 +20,7 @@
     "fashion-model": "^5.0.19",
     "fashion-model-defaults": "^1.0.1",
     "http-server": "^0.10.0",
-    "lasso": "3.0.0-beta.5",
+    "lasso": "3.0.0-beta.6",
     "marko": "^4.1.1",
     "marko-starter-generic-server": "^1.0.0",
     "marko-starter-lasso": "^2.0.0",
