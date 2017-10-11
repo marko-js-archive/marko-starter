@@ -10,6 +10,8 @@ command for creating Marko projects with `marko-starter`!
 
 ## Getting Started
 
+**Requires Node 6+**
+
 To get started, `marko-starter` may be installed locally to your project or
 globally:
 
