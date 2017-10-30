@@ -1,6 +1,7 @@
 {
-    "taglibImports": [
-        "marko-starter-lasso/marko.json",
-        "browser-refresh-taglib/marko.json"
-    ]
+  "taglibImports": [
+    "@ebay/lasso-marko-taglib/marko.json",
+    "~/src/plugins/marko.json",
+    "browser-refresh-taglib/marko.json"
+  ]
 }

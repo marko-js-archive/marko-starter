@@ -1,6 +1,6 @@
 {
   "name": "marko-starter",
-  "version": "2.0.2",
+  "version": "3.0.0-beta.0",
   "description": "Simplify building and running a marko project",
   "main": "index.js",
   "repository": {
@@ -12,29 +12,40 @@
   "bin": {
     "marko-starter": "./bin/marko-starter"
   },
+  "scripts": {
+    "lint": "eslint .",
+    "test": "ava --verbose 'test/**/*.test.js'"
+  },
   "dependencies": {
+    "@ebay/lasso-marko-taglib": "^1.0.0",
     "app-root-dir": "^1.0.2",
     "browser-refresh": "^1.7.1",
     "browser-refresh-taglib": "^1.1.0",
-    "colors": "^1.1.2",
-    "fashion-model": "^5.0.19",
+    "chalk": "^2.3.0",
+    "fashion-model": "^6.0.2",
     "fashion-model-defaults": "^1.0.1",
+    "findit": "^2.0.0",
     "http-server": "^0.10.0",
-    "lasso": "3.0.0-beta.7",
-    "marko": "^4.1.1",
-    "marko-starter-generic-server": "^1.0.0",
-    "marko-starter-lasso": "^2.0.0",
+    "lasso-less": "^2.4.3",
+    "lasso-marko": "^2.2.2",
     "mkdirp": "^0.5.1",
-    "raptor-util": "^3.1.0",
     "require-self-ref": "^2.0.1",
-    "resolve-from": "^2.0.0",
+    "resolve-from": "^4.0.0",
     "reverse-path": "0.0.1",
     "rimraf": "^2.5.4",
-    "routes-table": "^1.2.1",
     "try-require": "^1.2.1"
   },
   "devDependencies": {
-    "eslint": "^3.13.0",
-    "eslint-config-marko": "latest"
+    "eslint": "^4.10.0",
+    "eslint-config-semistandard": "^11.0.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-standard": "^3.0.1"
+  },
+  "peerDependencies": {
+    "lasso": ">=3.0.0-beta.8",
+    "marko": "^4.5.6"
   }
 }

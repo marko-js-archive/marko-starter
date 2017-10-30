@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * HTTP server plugins use the following call to build a route:
  *

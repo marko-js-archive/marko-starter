@@ -1,6 +1,3 @@
-'use strict';
-
-const Raw = require('~/src/models/Raw');
 const logging = require('~/src/logging');
 const routeHandlerUtil = require('~/src/route-handler-util');
 const path = require('path');
@@ -46,14 +43,6 @@ module.exports = {
       default () {
         let version = this.getVersion();
         return version.split('.')[2] || '0';
-      }
-    },
-
-    colors: {
-      type: Boolean,
-      description: 'Use color in logging?',
-      default () {
-        return !this.getProduction();
       }
     },
 
@@ -107,67 +96,66 @@ module.exports = {
     //  from the end-user.
     ***************************************************************************/
     packageManifest: {
-      type: Raw,
+      type: {},
       description: 'Contents of package.json associated with project',
       configurable: false
     },
 
     logger: {
-      type: Raw,
+      type: {},
       description: 'The logger associated with this project',
       configurable: false
     },
 
     tasks: {
-      type: [Raw],
+      type: [],
       description: 'Tasks to run when project starts',
       configurable: false
     },
 
     hooks: {
-      type: Raw,
+      type: {},
       description: 'All hooks that have been registered',
       configurable: false
     },
 
     routes: {
-      type: [Raw],
+      type: [],
       description: 'Routes that have been added to this project',
       configurable: false,
       default: []
     },
 
     plugins: {
-      type: [Raw],
+      type: [],
       description: 'Plugins that should be added to the project'
     }
   },
 
   prototype: {
     addRoutes (routes) {
-      let existingRoutes = this.getRoutes();
-      let routePathPrefix = this.getRoutePathPrefix();
+      if (routes) {
+        let existingRoutes = this.getRoutes();
+        let routePathPrefix = this.getRoutePathPrefix();
+        for (let route of routes) {
+          if (!route.path) {
+            throw new Error('"path" is required for route');
+          }
 
-      for (let route of routes) {
-        if (!route.path) {
-          throw new Error('"path" is required for route');
+          if (routePathPrefix) {
+            route.path = path.join(routePathPrefix, route.path);
+          }
+
+          // When using `path` functions on Windows, forward slashes get replaced
+          // with double back slashes.
+          route.path = route.path.replace(/\\/g, '/');
+          existingRoutes.push(route);
         }
-
-        if (routePathPrefix) {
-          route.path = path.join(routePathPrefix, route.path);
-        }
-
-        // When using `path` functions on Windows, forward slashes get replaced
-        // with double back slashes.
-        route.path = route.path.replace(/\\/g, '/');
-        existingRoutes.push(route);
       }
     },
 
     logger (name) {
-      return logging.logger(this.getName() + ' ' + name, {
-        colors: this.getColors()
-      });
+      return logging.logger(this.getName() + ' ' + name);
     },
 
     getRouteHandlerUtil () {

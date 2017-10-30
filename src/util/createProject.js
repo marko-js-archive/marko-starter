@@ -1,11 +1,9 @@
-'use strict';
-
 const path = require('path');
 const logging = require('~/src/logging');
 const Model = require('fashion-model');
 const ProjectSchema = require('~/src/models/Project');
 
-const _loadFilesystemRoutes = require('./loadFilesystemRoutes');
+const searchForRoutes = require('~/src/util/searchForRoutes');
 const _triggerProjectHook = require('./triggerProjectHook');
 
 const DEFAULT_PROJECT_VERSION = '0.0.0';
@@ -41,7 +39,6 @@ function _findHooks (config, additionalConfig) {
   return hookLookup;
 }
 
-
 module.exports = (config, configOverrides) => {
   let hooks = _findHooks(config, configOverrides);
 
@@ -68,14 +65,7 @@ module.exports = (config, configOverrides) => {
 
   project.setVersion(version);
   project.applyDefaults();
-
-  if (project.getColors()) {
-    require('colors');
-  }
-
-  project.setLogger(logging.logger(project.getName(), {
-    colors: config.colors
-  }));
+  project.setLogger(logging.logger(project.getName()));
 
   project.setTasks([
     require('~/src/project-tasks/print-configuration')
@@ -83,7 +73,7 @@ module.exports = (config, configOverrides) => {
 
   return _triggerProjectHook(project, 'projectCreated')
     .then(() => {
-      return _loadFilesystemRoutes(project).then((routes) => {
+      return searchForRoutes(project).then((routes) => {
         project.addRoutes(routes);
       });
     })

@@ -1,23 +1,25 @@
-'use strict';
-
 /*
 Allow requiring paths relative to the root of the project:
 require('~/src');
 */
 require('require-self-ref');
 
+const chalk = require('chalk');
+
+const requireFromProject = require('~/src/util/requireFromProject');
+
 // The following line installs the Node.js require extension
 // for `.marko` files. Once installed, `*.marko` files can be
 // required just like any other JavaScript modules.
-require('marko/node-require').install();
-require('marko/compiler').config.meta = true;
-require('lasso/node-require-no-op').enable('.css', '.less', '.styl', '.scss', '.sass');
+requireFromProject('marko/node-require').install();
+requireFromProject('marko/compiler').config.meta = true;
+requireFromProject('lasso/node-require-no-op').enable('.css', '.less', '.styl', '.scss', '.sass');
 
 /*
 Browser Refresh
 */
-require('marko/browser-refresh').enable();
-require('lasso/browser-refresh').enable('*.marko *.css *.less *.styl *.scss *.sass *.png *.jpeg *.jpg *.gif *.webp *.svg');
+requireFromProject('marko/browser-refresh').enable();
+requireFromProject('lasso/browser-refresh').enable('*.marko *.css *.less *.styl *.scss *.sass *.png *.jpeg *.jpg *.gif *.webp *.svg');
 
 const path = require('path');
 const rimraf = require('rimraf');
@@ -42,7 +44,7 @@ exports.plugins = (plugins) => {
   userPlugins = plugins;
 };
 
-pluginManager.installPlugins(['marko-starter-lasso']);
+pluginManager.installPlugins(['~/src/plugins/lasso']);
 
 /**
  * This method is used to supply the project configuration.
@@ -62,6 +64,7 @@ exports.projectConfig = (config) => {
       return config;
     },
     server (serverConfig) {
+      let logger = logging.logger('init');
       let beforeStartPromise = Promise.resolve();
 
       if (config.beforeStartServer) {
@@ -75,10 +78,18 @@ exports.projectConfig = (config) => {
           pluginManager.installPlugins(userPlugins);
 
           if (!pluginManager.isFeatureProvided('http-server')) {
-            pluginManager.installPlugins(['marko-starter-generic-server']);
+            let serverPlugin;
+            try {
+              serverPlugin = requireFromProject('marko-starter-generic-server');
+            } catch (err) {
+              logger.error(err);
+              logger.error(`If you are not using a standard HTTP server (for example, ${chalk.bold('koa')} or ${chalk.bold('express')}) then install ${chalk.bold('marko-starter-generic-server')} in your project.`);
+              const errToThrow = new Error('Cannot start HTTP server. See error above.');
+              delete errToThrow.stack;
+              throw errToThrow;
+            }
+            pluginManager.installPlugins([serverPlugin]);
           }
-
-          let logger = logging.logger('init');
 
           return _createProject(config, serverConfig).then((project) => {
             logger = project.getLogger();
@@ -104,14 +115,15 @@ exports.projectConfig = (config) => {
               .then(() => {
                 return _triggerProjectHook(project, 'afterServerStarted');
               });
-          }).catch((err) => {
-            logger.error(`Error starting server. ${err.stack || err}`);
-            process.exit(1);
           });
+        }).catch((err) => {
+          logger.error(`Error starting server. ${err.stack || err}`);
+          process.exit(1);
         });
     },
 
     build (buildConfig) {
+      let logger = logging.logger('init');
       let beforeBuildPromise = Promise.resolve();
 
       if (config.beforeBuild) {
@@ -125,8 +137,6 @@ exports.projectConfig = (config) => {
           const _buildAllRoutes = require('~/src/util/buildAllRoutes');
 
           pluginManager.installPlugins(userPlugins);
-
-          let logger = logging.logger('init');
 
           return _createProject(config, buildConfig).then((project) => {
             logger = project.getLogger();
@@ -156,10 +166,10 @@ exports.projectConfig = (config) => {
           }).then((buildResult) => {
             logger.success('Build complete');
             return buildResult;
-          }).catch((err) => {
-            logger.error(`Error building project. ${err.stack || err}`);
-            process.exit(1);
           });
+        }).catch((err) => {
+          logger.error(`Error building project. ${err.stack || err}`);
+          process.exit(1);
         });
     }
   };

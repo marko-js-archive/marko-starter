@@ -1,6 +1,4 @@
 #!/usr/bin/env node
-'use strict';
-
 const commands = require('./commands');
 const argv = process.argv.slice(2);
 let args;

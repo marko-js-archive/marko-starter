@@ -1,11 +1,9 @@
-'use strict';
-
-const colors = require('colors/safe');
+const chalk = require('chalk');
 const isProduction = require('../src/util/isProduction');
 const fork = require('child_process').fork;
 
 function _helpInColor (command, help) {
-  console.log(colors.green(command) + ': ' + colors.yellow(help));
+  console.log(chalk.green(command) + ': ' + chalk.yellow(help));
 }
 
 const commands = module.exports = {

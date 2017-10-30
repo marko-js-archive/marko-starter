@@ -1,5 +1,3 @@
-'use strict';
-
 const logging = require('~/src/logging');
 const Project = require('~/src/models/Project');
 
@@ -22,9 +20,8 @@ exports.installPlugins = (plugins) => {
   const pluginContext = {
     models: {
       Model: require('fashion-model/Model'),
-      Integer: require('fashion-model/Integer'),
       Enum: require('fashion-model/Enum'),
-      Raw: require('~/src/models/Raw'),
+      primitives: require('fashion-model/primitives'),
       Project: Project
     }
   };

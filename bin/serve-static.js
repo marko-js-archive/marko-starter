@@ -1,5 +1,3 @@
-'use strict';
-
 require('./env-check');
 
 const path = require('path');

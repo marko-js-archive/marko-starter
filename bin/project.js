@@ -1,5 +1,3 @@
-'use strict';
-
 const path = require('path');
 const projectDir = require('app-root-dir').get();
 const tryRequire = require('try-require');

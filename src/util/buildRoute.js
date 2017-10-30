@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = (options) => {
   const project = options.project;
   const route = options.route;

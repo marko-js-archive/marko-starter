@@ -1,5 +1,3 @@
-'use strict';
-
 const Model = require('fashion-model/Model');
 
 const Route = Model.extend({
