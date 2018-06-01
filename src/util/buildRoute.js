@@ -26,8 +26,9 @@ module.exports = (options) => {
       route.template.render(input, out);
     } else if (route.manifest) {
       // TODO: render manifest route
+      reject(new Error(`Unable to build route at path ${path}. "handler" or "template" is required. Route with just "manifest" property is not yet supported.`));
     } else {
-      throw new Error(`Unable to build route at path ${path}. "handler", "template", or "manifest" property is required`);
+      reject(new Error(`Unable to build route at path ${path}. "handler", "template", or "manifest" property is required`));
     }
   }).then(() => {
     logger.success(`Finished building page ${path}`);
