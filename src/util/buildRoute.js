@@ -33,5 +33,6 @@ module.exports = (options) => {
     logger.success(`Finished building page ${path}`);
   }).catch((err) => {
     logger.error(`Error building page ${path}. Error: ${err.stack || err.toString()}`);
+    throw err;
   });
 };
