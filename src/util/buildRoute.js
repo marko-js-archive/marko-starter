@@ -13,6 +13,7 @@ module.exports = (options) => {
 
     const input = {
       path,
+      headers: options.headers || {},
       params: options.params || {},
       query: options.query || {},
       metadata: route.metadata || {}
