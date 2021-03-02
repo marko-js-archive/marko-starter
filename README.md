@@ -1,3 +1,4 @@
+# marko-starter is deprecated, check out [@marko/serve](https://github.com/marko-js/cli/blob/master/packages/serve/README.md) for an updated zero config Marko setup!
 # marko-starter
 
 `marko-starter` is a project for building and running
